@@ -17,12 +17,29 @@ const ImageForm = () => {
   const [showModal, setShowModal] = useState(false);
   const [response, setResponse] = useState(null);
 
-  useEffect(() => {
+ useEffect(() => {
     if (!searchQuery) {
       return;
     }
+
+    const fetchImages = async () => {
+      const API_KEY = '34731072-348d9a1558c6b29bcd98e02ff';
+      setLoading(true);
+      try {
+        const apiResponse = await axios.get(
+          `https://pixabay.com/api/?key=${API_KEY}&q=${searchQuery}&page=${page}&per_page=12`
+        );
+        setImages(prevImages => [...prevImages, ...apiResponse.data.hits]);
+        setLoading(false);
+        setResponse(apiResponse);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+
     fetchImages();
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   const toggleModal = (image = null) => {
     setShowModal(show => !show);
@@ -35,21 +52,6 @@ const ImageForm = () => {
     setImages([]);
   };
 
-  const fetchImages = async () => {
-    const API_KEY = '34731072-348d9a1558c6b29bcd98e02ff';
-    setLoading(true);
-    try {
-      const apiResponse = await axios.get(
-        `https://pixabay.com/api/?key=${API_KEY}&q=${searchQuery}&page=${page}&per_page=12`
-      );
-      setImages(prevImages => [...prevImages, ...apiResponse.data.hits]);
-      setLoading(false);
-      setResponse(apiResponse);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);
