@@ -22,7 +22,7 @@ const ImageForm = () => {
       return;
     }
     fetchImages();
-  }, [searchQuery, page]);
+  }, [searchQuery]);
 
   const toggleModal = (image = null) => {
     setShowModal(show => !show);
