@@ -1,13 +1,7 @@
 import ImageForm from './ImageForm';
 
-export const App = () => {
-  
-   {
-    
-    return (
-      <div>
-        <ImageForm />
-      </div>
-    );
-  }
-}
+export const App = () => (
+  <div>
+    <ImageForm />
+  </div>
+);

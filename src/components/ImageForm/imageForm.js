@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SearchBar from 'components/Searchbar';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import ImageGallery from 'components/ImageGallery';
 import Button from 'components/Button';
@@ -38,12 +39,12 @@ const ImageForm = () => {
     const API_KEY = '34731072-348d9a1558c6b29bcd98e02ff';
     setLoading(true);
     try {
-      const response = await axios.get(
+      const apiResponse = await axios.get(
         `https://pixabay.com/api/?key=${API_KEY}&q=${searchQuery}&page=${page}&per_page=12`
       );
-      setImages(prevImages => [...prevImages, ...response.data.hits]);
+      setImages(prevImages => [...prevImages, ...apiResponse.data.hits]);
       setLoading(false);
-      setResponse(response);
+      setResponse(apiResponse);
     } catch (error) {
       console.log(error);
       setLoading(false);
