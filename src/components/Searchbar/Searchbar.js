@@ -24,17 +24,6 @@ const SearchBar = ({ onSubmit }) => {
     setImagesName('');
   };
 
-  const handleIconClick = () => {
-    if (imagesName.trim() === '') {
-      toast.warn('Введите слово в поиск ', {
-        theme: 'colored',
-      });
-      return;
-    }
-    onSubmit(imagesName);
-    setImagesName('');
-  };
-
   return (
     <header className={css.Searchbar}>
       <form onSubmit={handleSubmit} className={css.SearchForm}>
@@ -52,12 +41,6 @@ const SearchBar = ({ onSubmit }) => {
             value={imagesName}
             onChange={handleChange}
           />
-          <div
-            className={css.SearchFormIconContainer}
-            onClick={handleIconClick}
-          >
-            <ImSearch className={css.SearchFormIcon} />
-          </div>
         </div>
       </form>
     </header>
